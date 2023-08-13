@@ -31,6 +31,7 @@ if 'entered_prompt' not in st.session_state:
 
 # Initialize the ChatOpenAI model
 chat = ChatOpenAI(
+    OPENAI_API_KEY="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",
     temperature=0.5,
     model_name="gpt-3.5-turbo"
 )
