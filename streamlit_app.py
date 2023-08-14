@@ -1,4 +1,5 @@
 # Import required libraries
+import os
 from dotenv import load_dotenv
 from itertools import zip_longest
 
