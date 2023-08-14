@@ -13,7 +13,9 @@ from langchain.schema import (
 )
 
 # Load environment variables
-load_dotenv()
+# load_dotenv()
+load_dotenv('.env')
+api_key = os.getenv('OPENAI_API_KEY')
 
 # Set streamlit page configuration
 st.set_page_config(page_title="ChatBot Starter")
@@ -31,7 +33,9 @@ if 'entered_prompt' not in st.session_state:
 
 # Initialize the ChatOpenAI model
 # openai_api_key="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",
+
 chat = ChatOpenAI(
+    openai_api_key=api_key,
     temperature=0.5,
     model_name="gpt-3.5-turbo"
 )
