@@ -15,23 +15,36 @@ from langchain.schema import (
 
 from google.oauth2 import id_token
 from google.auth.transport import requests
+from google_auth_oauthlib.flow import Flow
+from streamlit import caching
+
 #import streamlit as st
 
 # Define your Google OAuth credentials
 # YOUR_CLIENT_ID
-CLIENT_ID = '583040091662-i7o8d2td7nb31p9h135nep4l2nddgq4q.apps.googleusercontent.com'
+# CLIENT_ID = '583040091662-i7o8d2td7nb31p9h135nep4l2nddgq4q.apps.googleusercontent.com'
 #import streamlit as st
 # 'path/to/your/client_secrets.json',
 # CLIENT_ID
 # /http://localhost:8501/
+# 'path/to/your/client_secrets.json'
+# http://localhost:8501/
 
-from google_auth_oauthlib.flow import Flow
 
 # Set streamlit page configuration
 st.set_page_config(page_title="ChatBot Starter")
 st.title("ChatBot Starter")
 
-def google_auth_flow():
+# import streamlit as st
+# from google_auth_oauthlib.flow import Flow
+
+
+class SessionState:
+    def __init__(self):
+        self.login = False
+        self.user_email = None
+
+def google_auth_flow(session_state):
     flow = Flow.from_client_secrets_file(
         'google_id.json',
         scopes=['openid', 'email'],
@@ -52,11 +65,21 @@ def google_auth_flow():
         # Use the credentials to authenticate the user in your app
         # You can store the credentials or extract the necessary information (e.g., email) for your login process
         # For example:
-        user_email = credentials.id_token['email']
-        st.write(f'Logged in as: {user_email}')
+        session_state.login = True
+        session_state.user_email = credentials.id_token['email']
+        st.write(f'Logged in as: {session_state.user_email}')
+        caching.clear_cache()  # Clear the cache to reset the app
+
+def main():
+    session_state = SessionState()
+
+    if not session_state.login:
+        google_auth_flow(session_state)
+    else:
+        st.write(f'Logged in as: {session_state.user_email}')
 
 if __name__ == '__main__':
-    google_auth_flow()
+    main()
 
 # Load environment variables
 # load_dotenv()
