@@ -22,12 +22,13 @@ from google.auth.transport import requests
 CLIENT_ID = '583040091662-i7o8d2td7nb31p9h135nep4l2nddgq4q.apps.googleusercontent.com'
 #import streamlit as st
 # 'path/to/your/client_secrets.json',
+# CLIENT_ID
 
 from google_auth_oauthlib.flow import Flow
 
 def google_auth_flow():
     flow = Flow.from_client_secrets_file(
-        CLIENT_ID,
+        google_id.json,
         scopes=['openid', 'email'],
         redirect_uri='http://localhost:8501/'
     )
