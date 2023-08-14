@@ -30,8 +30,8 @@ if 'entered_prompt' not in st.session_state:
     st.session_state['entered_prompt'] = ""  # Store the latest user input
 
 # Initialize the ChatOpenAI model
+# openai_api_key="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",
 chat = ChatOpenAI(
-    openai_api_key="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",
     temperature=0.5,
     model_name="gpt-3.5-turbo"
 )
