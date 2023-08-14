@@ -29,7 +29,7 @@ from google_auth_oauthlib.flow import Flow
 # /http://localhost:8501/
 # 'path/to/your/client_secrets.json'
 # http://localhost:8501/
-
+# /auth/callback
 
 # Set streamlit page configuration
 st.set_page_config(page_title="ChatBot Starter")
@@ -48,7 +48,7 @@ def google_auth_flow(session_state):
     flow = Flow.from_client_secrets_file(
         'google_id.json',
         scopes=['openid', 'email'],
-        redirect_uri='https://plagiarism.streamlit.app/auth/callback'
+        redirect_uri='https://plagiarism.streamlit.app'
     )
     authorization_url, state = flow.authorization_url(
         access_type='offline',
