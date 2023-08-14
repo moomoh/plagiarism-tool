@@ -12,6 +12,44 @@ from langchain.schema import (
     HumanMessage,
     AIMessage
 )
+import streamlit as st
+from google.oauth2 import id_token
+from google.auth.transport import requests
+
+# Define your Google OAuth credentials
+# YOUR_CLIENT_ID
+CLIENT_ID = '583040091662-i7o8d2td7nb31p9h135nep4l2nddgq4q.apps.googleusercontent.com'
+
+# Create a login button
+def login():
+    st.title("Login with Google")
+    login_button = st.button("Login")
+
+    if login_button:
+        # Request user authentication
+        auth_code = st.experimental_get_query_params().get('code', None)
+        if auth_code:
+            try:
+                # Exchange the authorization code for an access token
+                token = id_token.fetch_id_token(requests.Request(), CLIENT_ID, auth_code)
+                # Validate the token and extract user information
+                # You can use `token` to authenticate the user and store session state
+                st.write("Login successful!")
+            except ValueError as e:
+                st.error("Authentication failed. Please try again.")
+        else:
+            # Redirect the user to the Google Sign-In page
+            auth_url = f"https://accounts.google.com/o/oauth2/auth?client_id={CLIENT_ID}&response_type=code&scope=openid%20email&redirect_uri={st.experimental_get_url()}&access_type=offline"
+            st.experimental_set_query_params(code="")
+            st.experimental_rerun()
+            st.experimental_redirect(auth_url)
+
+# Main app logic
+def main():
+    login()
+
+if __name__ == "__main__":
+    main()
 
 # Load environment variables
 # load_dotenv()
