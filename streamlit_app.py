@@ -20,37 +20,37 @@ from google.auth.transport import requests
 # Define your Google OAuth credentials
 # YOUR_CLIENT_ID
 CLIENT_ID = '583040091662-i7o8d2td7nb31p9h135nep4l2nddgq4q.apps.googleusercontent.com'
+#import streamlit as st
+# 'path/to/your/client_secrets.json',
 
-# Create a login button
-def login():
-    st.title("Login with Google")
-    login_button = st.button("Login")
+from google_auth_oauthlib.flow import Flow
 
-    if login_button:
-        # Request user authentication
-        auth_code = st.experimental_get_query_params().get('code', None)
-        if auth_code:
-            try:
-                # Exchange the authorization code for an access token
-                token = id_token.fetch_id_token(requests.Request(), CLIENT_ID, auth_code)
-                # Validate the token and extract user information
-                # You can use `token` to authenticate the user and store session state
-                st.write("Login successful!")
-            except ValueError as e:
-                st.error("Authentication failed. Please try again.")
-        else:
-            # Redirect the user to the Google Sign-In page
-            auth_url = f"https://accounts.google.com/o/oauth2/auth?client_id={CLIENT_ID}&response_type=code&scope=openid%20email&redirect_uri={st.experimental_get_url()}&access_type=offline"
-            st.experimental_set_query_params(code="")
-            st.experimental_rerun()
-            st.experimental_redirect(auth_url)
+def google_auth_flow():
+    flow = Flow.from_client_secrets_file(
+        CLIENT_ID,
+        scopes=['openid', 'email'],
+        redirect_uri='http://localhost:8501/'
+    )
+    authorization_url, state = flow.authorization_url(
+        access_type='offline',
+        include_granted_scopes='true'
+    )
+    st.write('Click the link below to log in with Google:')
+    st.markdown(f'<a href="{authorization_url}">Login with Google</a>', unsafe_allow_html=True)
 
-# Main app logic
-def main():
-    login()
+    # Handle the authorization response
+    if 'code' in st.experimental_get_query_params():
+        auth_code = st.experimental_get_query_params()['code'][0]
+        flow.fetch_token(authorization_response=auth_code)
+        credentials = flow.credentials
+        # Use the credentials to authenticate the user in your app
+        # You can store the credentials or extract the necessary information (e.g., email) for your login process
+        # For example:
+        user_email = credentials.id_token['email']
+        st.write(f'Logged in as: {user_email}')
 
-if __name__ == "__main__":
-    main()
+if __name__ == '__main__':
+    google_auth_flow()
 
 # Load environment variables
 # load_dotenv()
