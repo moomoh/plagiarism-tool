@@ -3,3 +3,5 @@ streamlit-chat
 python-dotenv
 langchain
 openai
+google-auth
+google-auth-oauthlib
