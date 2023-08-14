@@ -56,7 +56,7 @@ class SessionState:
     def __init__(self):
         self.user = None
 
-@st.cache(allow_output_mutation=True)
+@st.cache_data(allow_output_mutation=True)
 def get_google_token(token):
     try:
         idinfo = id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID)
