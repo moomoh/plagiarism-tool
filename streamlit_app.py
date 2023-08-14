@@ -23,14 +23,19 @@ CLIENT_ID = '583040091662-i7o8d2td7nb31p9h135nep4l2nddgq4q.apps.googleuserconten
 #import streamlit as st
 # 'path/to/your/client_secrets.json',
 # CLIENT_ID
+# /http://localhost:8501/
 
 from google_auth_oauthlib.flow import Flow
+
+# Set streamlit page configuration
+st.set_page_config(page_title="ChatBot Starter")
+st.title("ChatBot Starter")
 
 def google_auth_flow():
     flow = Flow.from_client_secrets_file(
         'google_id.json',
         scopes=['openid', 'email'],
-        redirect_uri='http://localhost:8501/'
+        redirect_uri='https://plagiarism.streamlit.app'
     )
     authorization_url, state = flow.authorization_url(
         access_type='offline',
@@ -58,9 +63,7 @@ if __name__ == '__main__':
 load_dotenv('openai.env')
 api_key = os.getenv('OPENAI_API_KEY')
 
-# Set streamlit page configuration
-st.set_page_config(page_title="ChatBot Starter")
-st.title("ChatBot Starter")
+
 
 # Initialize session state variables
 if 'generated' not in st.session_state:
