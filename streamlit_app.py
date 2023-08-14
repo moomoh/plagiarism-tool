@@ -16,6 +16,8 @@ from langchain.schema import (
 from google.oauth2 import id_token
 from google.auth.transport import requests
 from google_auth_oauthlib.flow import Flow
+
+os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 # from streamlit import caching
 
 #import streamlit as st
