@@ -35,7 +35,7 @@ def google_auth_flow():
     flow = Flow.from_client_secrets_file(
         'google_id.json',
         scopes=['openid', 'email'],
-        redirect_uri='https://plagiarism.streamlit.app'
+        redirect_uri='https://plagiarism.streamlit.app/auth/callback'
     )
     authorization_url, state = flow.authorization_url(
         access_type='offline',
