@@ -12,9 +12,10 @@ from langchain.schema import (
     HumanMessage,
     AIMessage
 )
-import streamlit as st
+
 from google.oauth2 import id_token
 from google.auth.transport import requests
+#import streamlit as st
 
 # Define your Google OAuth credentials
 # YOUR_CLIENT_ID
