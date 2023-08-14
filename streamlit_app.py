@@ -40,6 +40,10 @@ st.title("ChatBot Starter")
 # import streamlit as st
 # from google_auth_oauthlib.flow import Flow
 
+# import streamlit as st
+# from google_auth_oauthlib.flow import Flow
+# https://localhost:8501/
+# 'path/to/your/client_secrets.json'
 
 class SessionState:
     def __init__(self):
@@ -60,19 +64,23 @@ def google_auth_flow(session_state):
     st.markdown(f'<a href="{authorization_url}">Login with Google</a>', unsafe_allow_html=True)
 
     # Handle the authorization response
-    if 'code' in st.experimental_get_query_params():
+    if 'code' in st.experimental_get_query_params() and 'state' in st.experimental_get_query_params():
         auth_code = st.experimental_get_query_params()['code'][0]
-        flow.fetch_token(authorization_response=auth_code)
-        credentials = flow.credentials
-        # Use the credentials to authenticate the user in your app
-        # You can store the credentials or extract the necessary information (e.g., email) for your login process
-        # For example:
-        session_state.login = True
-        session_state.user_email = credentials.id_token['email']
-        st.write(f'Logged in as: {session_state.user_email}')
-        st.experimental_rerun()  # Rerun the app to update the UI
-
-#        caching.clear_cache()  # Clear the cache to reset the app
+        returned_state = st.experimental_get_query_params()['state'][0]
+        if state == returned_state:
+            flow.fetch_token(authorization_response=auth_code)
+            credentials = flow.credentials
+            # Use the credentials to authenticate the user in your app
+            # You can store the credentials or extract the necessary information (e.g., email) for your login process
+            # For example:
+            session_state.login = True
+            session_state.user_email = credentials.id_token['email']
+            st.write(f'Logged in as: {session_state.user_email}')
+            st.experimental_rerun()  # Rerun the app to update the UI
+        else:
+            st.write('State parameter mismatch. Authentication failed.')
+    else:
+        st.write('Authentication failed. Missing code or state parameter.')
 
 def main():
     session_state = SessionState()
@@ -84,6 +92,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 
 # Load environment variables
 # load_dotenv()
