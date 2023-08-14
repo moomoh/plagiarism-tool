@@ -16,7 +16,7 @@ from langchain.schema import (
 from google.oauth2 import id_token
 from google.auth.transport import requests
 from google_auth_oauthlib.flow import Flow
-from streamlit import caching
+# from streamlit import caching
 
 #import streamlit as st
 
@@ -68,7 +68,9 @@ def google_auth_flow(session_state):
         session_state.login = True
         session_state.user_email = credentials.id_token['email']
         st.write(f'Logged in as: {session_state.user_email}')
-        caching.clear_cache()  # Clear the cache to reset the app
+        st.experimental_rerun()  # Rerun the app to update the UI
+
+#        caching.clear_cache()  # Clear the cache to reset the app
 
 def main():
     session_state = SessionState()
