@@ -28,7 +28,7 @@ from google_auth_oauthlib.flow import Flow
 
 def google_auth_flow():
     flow = Flow.from_client_secrets_file(
-        google_id.json,
+        'google_id.json',
         scopes=['openid', 'email'],
         redirect_uri='http://localhost:8501/'
     )
