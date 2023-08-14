@@ -44,58 +44,54 @@ st.title("ChatBot Starter")
 # from google_auth_oauthlib.flow import Flow
 # https://localhost:8501/
 # 'path/to/your/client_secrets.json'
+# 
+# your_client_id
 # Load environment variables
 # load_dotenv()
 
+import streamlit as st
+from google.oauth2 import id_token
+from google.auth.transport import requests
+
+CLIENT_ID = '583040091662-i7o8d2td7nb31p9h135nep4l2nddgq4q.apps.googleusercontent.com'  # Replace with your actual client ID
 
 class SessionState:
     def __init__(self):
-        self.login = False
-        self.user_email = None
+        self.user = None
 
-def google_auth_flow(session_state):
-    flow = Flow.from_client_secrets_file(
-        'google_id.json',
-        scopes=['openid', 'email'],
-        redirect_uri='https://plagiarism.streamlit.app'
-    )
-    authorization_url, state = flow.authorization_url(
-        access_type='offline',
-        include_granted_scopes='true'
-    )
-    st.write('Click the link below to log in with Google:')
-    st.markdown(f'<a href="{authorization_url}">Login with Google</a>', unsafe_allow_html=True)
-
-    # Handle the authorization response
-    if 'code' in st.experimental_get_query_params() and 'state' in st.experimental_get_query_params():
-        auth_code = st.experimental_get_query_params()['code'][0]
-        returned_state = st.experimental_get_query_params()['state'][0]
-        if state == returned_state:
-            flow.fetch_token(authorization_response=auth_code)
-            credentials = flow.credentials
-            # Use the credentials to authenticate the user in your app
-            # You can store the credentials or extract the necessary information (e.g., email) for your login process
-            # For example:
-            session_state.login = True
-            session_state.user_email = credentials.id_token['email']
-            st.write(f'Logged in as: {session_state.user_email}')
-            st.experimental_rerun()  # Rerun the app to update the UI
-        else:
-            st.write('State parameter mismatch. Authentication failed.')
-    else:
-        st.write('Authentication failed. Missing code or state parameter.')
+@st.cache(allow_output_mutation=True)
+def get_google_token(token):
+    try:
+        idinfo = id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID)
+        if 'email' in idinfo:
+            return idinfo
+    except ValueError:
+        pass
+    return None
 
 def main():
     session_state = SessionState()
 
-    if not session_state.login:
-        google_auth_flow(session_state)
-    else:
-        st.write(f'Logged in as: {session_state.user_email}')
+    # Streamlit app code
+    st.title("Google Authentication Example")
+    token = st.text_input("Enter Google ID token")
+
+    if st.button("Authenticate"):
+        user = get_google_token(token)
+        if user:
+            session_state.user = user
+            st.success(f"Successfully authenticated as {user['email']}")
+        else:
+            st.error("Invalid token or authentication failed")
+
+    # Display app content if the user is logged in
+    if session_state.user:
+        st.subheader("Welcome to the app!")
+        st.write(f"Logged in as: {session_state.user['email']}")
+        # Add your app logic here
 
 if __name__ == '__main__':
     main()
-
 
 load_dotenv('openai.env')
 api_key = os.getenv('OPENAI_API_KEY')
