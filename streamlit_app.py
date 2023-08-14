@@ -15,7 +15,7 @@ from langchain.schema import (
 
 # Load environment variables
 # load_dotenv()
-load_dotenv('.env')
+load_dotenv('openai.env')
 api_key = os.getenv('OPENAI_API_KEY')
 
 # Set streamlit page configuration
