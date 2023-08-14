@@ -49,9 +49,6 @@ st.title("ChatBot Starter")
 # Load environment variables
 # load_dotenv()
 
-import streamlit as st
-from google.oauth2 import id_token
-from google.auth.transport import requests
 
 CLIENT_ID = '583040091662-i7o8d2td7nb31p9h135nep4l2nddgq4q.apps.googleusercontent.com'  # Replace with your actual client ID
 
