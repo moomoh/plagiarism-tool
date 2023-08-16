@@ -56,44 +56,37 @@ st.title("ChatBot Starter")
 
 CLIENT_ID = '583040091662-i7o8d2td7nb31p9h135nep4l2nddgq4q.apps.googleusercontent.com'  # Replace with your actual client ID
 
-class SessionState:
-    def __init__(self):
-        self.user = None
-
-@st.cache_data
-def get_google_token(token):
+def verify_google_token(token):
     try:
+        # Verify the token and get the user's email
         idinfo = id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID)
-        if 'email' in idinfo:
-            return idinfo
+        email = idinfo['email']
+        return email
     except ValueError:
-        pass
-    return None
+        # Invalid token
+        return None
 
 def main():
-    session_state = SessionState()
+    st.title("Google Email Login Example")
+    
+    # Google login button
+    if 'google_token' not in st.session_state:
+        st.session_state.google_token = None
 
-    # Streamlit app code
-    st.title("Google Authentication Example")
-    token = st.text_input("Enter Google ID token")
+    if st.button("Login with Google"):
+        st.session_state.google_token = st.secrets["google_client_token"]  # Get the token from the client-side code
 
-    if st.button("Authenticate"):
-        user = get_google_token(token)
-        if user:
-            session_state.user = user
-            st.success(f"Successfully authenticated as {user['email']}")
+    # Verify token and display email
+    if st.session_state.google_token:
+        email = verify_google_token(st.session_state.google_token)
+        if email:
+            st.success(f"Logged in as {email}")
         else:
-            st.error("Invalid token or authentication failed")
+            st.error("Invalid token")
 
-    # Display app content if the user is logged in
-    if session_state.user:
-        st.subheader("Welcome to the app!")
-        st.write(f"Logged in as: {session_state.user['email']}")
-        # Add your app logic here
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
-
+    
 load_dotenv('openai.env')
 api_key = os.getenv('OPENAI_API_KEY')
 
