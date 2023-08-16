@@ -16,6 +16,7 @@ from langchain.schema import (
 from google.oauth2 import id_token
 from google.auth.transport import requests
 from google_auth_oauthlib.flow import Flow
+import streamlit_google_oauth as oauth
 #from google.auth import GoogleOAuth2
 # from google.auth.transport.requests import GoogleOAuth2
 
