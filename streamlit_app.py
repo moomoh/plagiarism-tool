@@ -58,32 +58,46 @@ CLIENT_ID = '583040091662-i7o8d2td7nb31p9h135nep4l2nddgq4q.apps.googleuserconten
 # 583040091662-i7o8d2td7nb31p9h135nep4l2nddgq4q.apps.googleusercontent.com
 CLIENT_SECRET='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'
 #"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"
+url='https://plagiarism.streamlit.app'
 
-def main():
-    #st.title("Your Streamlit App")
-    
-    # Google Authentication
-    st.subheader("Google Authentication")
-    client_id = CLIENT_ID
-    # "YOUR_CLIENT_ID"  # Replace with your OAuth client ID
-    token = st.text_input("Enter your Google ID token", type="password")
-    if st.button("Authenticate"):
-        try:
-            idinfo = id_token.verify_oauth2_token(token, requests.Request(), client_id)
-            if idinfo['aud'] != client_id:
-                raise ValueError("Invalid client ID")
-            st.success(f"Authentication successful: {idinfo['name']}")
-            # Continue with the rest of your app logic here
-        except ValueError as e:
-            st.error("Authentication failed")
-            st.error(e)
-    
-    # Other app content
-    # ...
-    
-if __name__ == "__main__":
-    main()
-    
+client_id = CLIENT_ID
+# os.environ['GOOGLE_CLIENT_ID']
+client_secret = CLIENT_SECRET
+# os.environ['GOOGLE_CLIENT_SECRET']
+redirect_uri = url
+#os.environ['REDIRECT_URI']
+
+client = GoogleOAuth2(client_id, client_secret)
+
+async def write_authorization_url(client,
+                                  redirect_uri):
+    authorization_url = await client.get_authorization_url(
+        redirect_uri,
+        scope=["email"],
+        extras_params={"access_type": "offline"},
+    )
+    return authorization_url
+authorization_url = asyncio.run(
+    write_authorization_url(client=client,
+                            redirect_uri=redirect_uri)
+)
+st.write(f'''<h1>
+    Please login using this <a target="_self"
+    href="{authorization_url}">url</a></h1>''',
+         unsafe_allow_html=True)
+code = st.experimental_get_query_params()['code']
+
+async def write_access_token(client,
+                             redirect_uri,
+                             code):
+    token = await client.get_access_token(code, redirect_uri)
+    return token
+token = asyncio.run(
+    write_access_token(client=client,
+                       redirect_uri=redirect_uri,
+                       code=code))
+session_state.token = token
+
 load_dotenv('openai.env')
 api_key = os.getenv('OPENAI_API_KEY')
 
