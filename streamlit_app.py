@@ -49,6 +49,10 @@ st.title("ChatBot Starter")
 # Load environment variables
 # load_dotenv()
 
+#@st.cache(allow_output_mutation=True)
+
+#(allow_output_mutation=True)
+
 
 CLIENT_ID = '583040091662-i7o8d2td7nb31p9h135nep4l2nddgq4q.apps.googleusercontent.com'  # Replace with your actual client ID
 
@@ -56,9 +60,7 @@ class SessionState:
     def __init__(self):
         self.user = None
 
-#@st.cache(allow_output_mutation=True)
 @st.cache_data
-#(allow_output_mutation=True)
 def get_google_token(token):
     try:
         idinfo = id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID)
