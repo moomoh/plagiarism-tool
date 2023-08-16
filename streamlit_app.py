@@ -69,36 +69,25 @@ client_secret = CLIENT_SECRET
 redirect_uri = url
 #os.environ['REDIRECT_URI']
 
-client = GoogleOAuth2(client_id, client_secret)
-
-async def write_authorization_url(client,
-                                  redirect_uri):
-    authorization_url = await client.get_authorization_url(
-        redirect_uri,
-        scope=["email"],
-        extras_params={"access_type": "offline"},
+if __name__ == "__main__":
+    app_name = '''
+    Streamlit Google Authentication Demo
+    '''
+    app_desc = '''
+    A streamlit application that authenticates users by <strong>Google Oauth</strong>.
+    The user must have a google account to log in into the application.
+    '''
+    login_info = oauth.login(
+        client_id=client_id,
+        client_secret=client_secret,
+        redirect_uri=redirect_uri,
+        app_name=app_name,
+        app_desc=app_desc,
+        logout_button_text="Logout",
     )
-    return authorization_url
-authorization_url = asyncio.run(
-    write_authorization_url(client=client,
-                            redirect_uri=redirect_uri)
-)
-st.write(f'''<h1>
-    Please login using this <a target="_self"
-    href="{authorization_url}">url</a></h1>''',
-         unsafe_allow_html=True)
-code = st.experimental_get_query_params()['code']
-
-async def write_access_token(client,
-                             redirect_uri,
-                             code):
-    token = await client.get_access_token(code, redirect_uri)
-    return token
-token = asyncio.run(
-    write_access_token(client=client,
-                       redirect_uri=redirect_uri,
-                       code=code))
-session_state.token = token
+    if login_info:
+        user_id, user_email = login_info
+        st.write(f"Welcome {user_email}")
 
 load_dotenv('openai.env')
 api_key = os.getenv('OPENAI_API_KEY')
