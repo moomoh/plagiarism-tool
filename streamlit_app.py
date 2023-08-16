@@ -59,35 +59,28 @@ CLIENT_ID = '583040091662-i7o8d2td7nb31p9h135nep4l2nddgq4q.apps.googleuserconten
 CLIENT_SECRET='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'
 #"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"
 
-def verify_google_token(token):
-    try:
-        # Verify the token and get the user's email
-        idinfo = id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID)
-        email = idinfo['email']
-        return email
-    except ValueError:
-        # Invalid token
-        return None
-
 def main():
-    st.title("Google Email Login Example")
+    #st.title("Your Streamlit App")
     
-    # Google login button
-    if 'google_token' not in st.session_state:
-        st.session_state.google_token = None
-
-    if st.button("Login with Google"):
-        st.session_state.google_token = CLIENT_SECRET
-        #st.secrets["google_client_token"]  # Get the token from the client-side code
-
-    # Verify token and display email
-    if st.session_state.google_token:
-        email = verify_google_token(st.session_state.google_token)
-        if email:
-            st.success(f"Logged in as {email}")
-        else:
-            st.error("Invalid token")
-
+    # Google Authentication
+    st.subheader("Google Authentication")
+    client_id = CLIENT_ID
+    # "YOUR_CLIENT_ID"  # Replace with your OAuth client ID
+    token = st.text_input("Enter your Google ID token", type="password")
+    if st.button("Authenticate"):
+        try:
+            idinfo = id_token.verify_oauth2_token(token, requests.Request(), client_id)
+            if idinfo['aud'] != client_id:
+                raise ValueError("Invalid client ID")
+            st.success(f"Authentication successful: {idinfo['name']}")
+            # Continue with the rest of your app logic here
+        except ValueError as e:
+            st.error("Authentication failed")
+            st.error(e)
+    
+    # Other app content
+    # ...
+    
 if __name__ == "__main__":
     main()
     
