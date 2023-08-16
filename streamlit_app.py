@@ -55,6 +55,7 @@ st.title("ChatBot Starter")
 
 
 CLIENT_ID = '583040091662-i7o8d2td7nb31p9h135nep4l2nddgq4q.apps.googleusercontent.com'  # Replace with your actual client ID
+CLIENT_SECRET="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"
 
 def verify_google_token(token):
     try:
@@ -74,7 +75,8 @@ def main():
         st.session_state.google_token = None
 
     if st.button("Login with Google"):
-        st.session_state.google_token = st.secrets["google_client_token"]  # Get the token from the client-side code
+        st.session_state.google_token = CLIENT_SECRET
+        #st.secrets["google_client_token"]  # Get the token from the client-side code
 
     # Verify token and display email
     if st.session_state.google_token:
