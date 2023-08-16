@@ -9,9 +9,22 @@ from dotenv import load_dotenv
 
 load_dotenv('.env')
 
-CLIENT_ID = os.environ['CLIENT_ID']
-CLIENT_SECRET = os.environ['CLIENT_SECRET']
-REDIRECT_URI = os.environ['REDIRECT_URI']
+CLIENT_ID = '583040091662-i7o8d2td7nb31p9h135nep4l2nddgq4q.apps.googleusercontent.com'  # Replace with your actual client ID
+# 583040091662-i7o8d2td7nb31p9h135nep4l2nddgq4q.apps.googleusercontent.com
+CLIENT_SECRET='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'
+#"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"
+#url
+REDIRECT_URI='https://plagiarism.streamlit.app'
+
+client_id = CLIENT_ID
+# os.environ['GOOGLE_CLIENT_ID']
+client_secret = CLIENT_SECRET
+# os.environ['GOOGLE_CLIENT_SECRET']
+redirect_uri = url
+#os.environ['REDIRECT_URI']
+#CLIENT_ID = os.environ['CLIENT_ID']
+#CLIENT_SECRET = os.environ['CLIENT_SECRET']
+#REDIRECT_URI = os.environ['REDIRECT_URI']
 
 
 async def get_authorization_url(client: GoogleOAuth2, redirect_uri: str):
