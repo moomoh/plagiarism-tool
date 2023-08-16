@@ -20,7 +20,8 @@ client_id = CLIENT_ID
 # os.environ['GOOGLE_CLIENT_ID']
 client_secret = CLIENT_SECRET
 # os.environ['GOOGLE_CLIENT_SECRET']
-redirect_uri = url
+redirect_uri = REDIRECT_URI
+#url
 #os.environ['REDIRECT_URI']
 #CLIENT_ID = os.environ['CLIENT_ID']
 #CLIENT_SECRET = os.environ['CLIENT_SECRET']
