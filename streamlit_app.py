@@ -55,7 +55,8 @@ st.title("ChatBot Starter")
 
 
 CLIENT_ID = '583040091662-i7o8d2td7nb31p9h135nep4l2nddgq4q.apps.googleusercontent.com'  # Replace with your actual client ID
-CLIENT_SECRET="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"
+# 583040091662-i7o8d2td7nb31p9h135nep4l2nddgq4q.apps.googleusercontent.com
+CLIENT_SECRET='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'
 #"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"
 
 def verify_google_token(token):
