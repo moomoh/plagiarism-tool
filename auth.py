@@ -59,7 +59,8 @@ def display_user() -> void:
     user_id, user_email = asyncio.run(
         get_email(client, token['access_token']))
     st.write(
-        f"You're logged in as {user_email} and id is {user_id} and token  is {token}")
+        f"You're logged in as {user_email} and id is {user_id} ")
+    # and token  is {token}
 
 def get_token() -> void:
     client: GoogleOAuth2 = GoogleOAuth2(CLIENT_ID, CLIENT_SECRET)
