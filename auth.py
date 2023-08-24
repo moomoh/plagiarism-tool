@@ -48,6 +48,7 @@ def get_login_str():
     authorization_url = asyncio.run(
         get_authorization_url(client, REDIRECT_URI))
     return f'< a href = "{authorization_url}" target = "_self" > Google login < /a >'
+   # f'<a href="{url}" target="_blank"><button>Click Me!</button></a>'
    # 
 # f'<a target="_self" href="{authorization_url}" > Google login </a>'
    # <button>Google login</button> 
