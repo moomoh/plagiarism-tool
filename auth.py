@@ -44,10 +44,13 @@ async def get_email(client: GoogleOAuth2, token: str):
 
 
 def get_login_str():
+    image_url="login.png"
     client: GoogleOAuth2 = GoogleOAuth2(CLIENT_ID, CLIENT_SECRET)
     authorization_url = asyncio.run(
         get_authorization_url(client, REDIRECT_URI))
-    return f'<a href="{authorization_url}" target="_blank"><button>Google login</button></a>'
+    return f'<a href="authorization_url" class="button-image"><img src="{image_url}" alt="Google login"></a>'
+  #  f'<a href="{authorization_url}" target="_blank"><button>Google login</button></a>'
+  #  button_html = f'<a href="authorization_url" class="button-image"><img src="{image_url}" alt="Google login"></a>'
    # f'< a href = "{authorization_url}" target = "_self" > Google login < /a >'
    # f'<a href="{authorization_url}" target="_blank"><button>Google login</button></a>'
    # 
@@ -58,6 +61,8 @@ def get_login_str():
 # url
  # _blank
 # Click Me!
+#
+# Button Image
 
 
 def display_user() -> void:
