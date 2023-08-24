@@ -1,7 +1,17 @@
 import streamlit as st
+import asyncio
+from auth import *
+
 # st.markdown("# login")
 st.sidebar.markdown("# login")
 # import streamlit as st
+
+if __name__ == '__main__':
+    # st.title("Streamlit Oauth Login")
+    st.write(get_login_str(), unsafe_allow_html=True)
+        
+    if st.button("display user"):  
+        display_user()
 
 def main():
     st.title("Login Page")
@@ -22,6 +32,9 @@ def main():
 
     # Login with Google button
     st.write("Or login with Google:")
+    st.write(get_login_str(), unsafe_allow_html=True)
+    if st.button("display user"):  
+        display_user()
     if st.button("Login with Google"):
         st.write("login success")
         # Implement the logic to authenticate with Google
