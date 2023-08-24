@@ -23,6 +23,7 @@ def main():
     # Login with Google button
     st.write("Or login with Google:")
     if st.button("Login with Google"):
+        st.write("login success")
         # Implement the logic to authenticate with Google
         # This can involve using the Google Sign-In API or an authentication library
         # Once authenticated, you can redirect the user to the main app page or perform other actions
