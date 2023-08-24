@@ -20,7 +20,7 @@ from httpx_oauth.clients.google import GoogleOAuth2
 import asyncio
 from auth import *
 
-st.markdown("# Main page 🎈")
+# st.markdown("# Main page 🎈")
 st.sidebar.markdown("# Main page 🎈")
 
 
