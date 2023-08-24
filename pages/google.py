@@ -26,8 +26,9 @@ def main():
 
     # Google login button
     if st.button("Login with Google"):
-        token = get_google_token()
         st.write("printing trying now")
+        token = get_google_token()
+
 
         if token:
             # Validate the Google token and retrieve user information
