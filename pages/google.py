@@ -24,6 +24,7 @@ redirect_uri = url
 def main():
     st.title("Login Page")
     st.write("printing trying now")
+    st.write("printing trying now")
 
     st.write("Please log in with your Google account.")
 
