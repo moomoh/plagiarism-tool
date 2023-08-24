@@ -34,7 +34,7 @@ def main():
 
     # Login with Google button
     st.write("Or login with Google:")
-   st.markdown(get_login_str(), unsafe_allow_html=True)
+    st.markdown(get_login_str(), unsafe_allow_html=True)
     if st.button("display user"):  
         display_user()
     if st.button("Login with Google"):
