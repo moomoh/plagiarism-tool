@@ -3,7 +3,7 @@ from google.oauth2 import id_token
 from google.auth.transport import requests
 import os
 import asyncio
-from authlib import *
+from auth import *
 
 
 st.sidebar.markdown("# google login")
