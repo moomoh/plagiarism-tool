@@ -22,10 +22,11 @@ redirect_uri = url
 
 def main():
     st.title("Login Page")
+    st.write("printing trying now")
+
     st.write("Please log in with your Google account.")
 
     # Google login button
-    st.write("printing trying now")
     if st.button("Login with Google"):
         
         token = get_google_token()
