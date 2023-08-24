@@ -38,7 +38,7 @@ def main():
     if st.button("display user"):  
         display_user()
     if st.button("Login with Google"):
-        get_login_str()
+       # get_login_str()
         st.write("login success")
         # Implement the logic to authenticate with Google
         # This can involve using the Google Sign-In API or an authentication library
