@@ -44,7 +44,8 @@ async def get_email(client: GoogleOAuth2, token: str):
 
 
 def get_login_str():
-    image_url="https://github.com/moomoh/plagiarism-tool/blob/main/login.png"
+    image_url="https://raw.githubusercontent.com/moomoh/plagiarism-tool/main/login.png"
+    #"https://github.com/moomoh/plagiarism-tool/blob/main/login.png"
     #"login.png"
     client: GoogleOAuth2 = GoogleOAuth2(CLIENT_ID, CLIENT_SECRET)
     authorization_url = asyncio.run(
