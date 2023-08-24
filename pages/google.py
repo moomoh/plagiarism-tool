@@ -43,9 +43,10 @@ def get_google_token():
     # Implement the logic to retrieve the Google token
     # This can involve using the Google Sign-In API or an authentication library
     # Return the token if obtained successfully, None otherwise
-    token = None
     st.write("printing trying now")
 
+    token = None
+    
     # The implementation to obtain the token varies depending on your setup
     # Here's a basic example using the Google Sign-In API
     try:
