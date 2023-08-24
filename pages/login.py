@@ -34,10 +34,11 @@ def main():
 
     # Login with Google button
     st.write("Or login with Google:")
-    st.write(get_login_str(), unsafe_allow_html=True)
+ #   st.write(get_login_str(), unsafe_allow_html=True)
     if st.button("display user"):  
         display_user()
     if st.button("Login with Google"):
+        get_login_str()
         st.write("login success")
         # Implement the logic to authenticate with Google
         # This can involve using the Google Sign-In API or an authentication library
