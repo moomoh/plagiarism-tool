@@ -65,13 +65,7 @@ def get_google_token():
         st.error(f"Failed to obtain the Google token: {str(e)}")
 
     return token
-"""
-def get_google_token():
-    # Implement the logic to retrieve the Google token
-    # This can involve using the Google Sign-In API or an authentication library
-    # Return the token if obtained successfully, None otherwise
-    return None
-    """
+
 
 def validate_google_token(token):
     try:
