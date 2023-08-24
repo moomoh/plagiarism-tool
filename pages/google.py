@@ -1,7 +1,9 @@
 import streamlit as st
 from google.oauth2 import id_token
 from google.auth.transport import requests
+import asyncio
 from auth_lib import *
+
 
 st.sidebar.markdown("# google login")
 
