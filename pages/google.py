@@ -1,6 +1,7 @@
 import streamlit as st
 from google.oauth2 import id_token
 from google.auth.transport import requests
+from auth_lib.py import *
 
 st.sidebar.markdown("# google login")
 
@@ -29,7 +30,8 @@ def main():
     # Google login button
     if st.button("Login with Google"):
         
-        token = get_google_token()
+        #token = get_google_token()
+        token = get_token()
 
 
         if token:
