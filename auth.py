@@ -50,7 +50,7 @@ def get_login_str():
     client: GoogleOAuth2 = GoogleOAuth2(CLIENT_ID, CLIENT_SECRET)
     authorization_url = asyncio.run(
         get_authorization_url(client, REDIRECT_URI))
-        return f'<a href="{authorization_url}" class="button-image"><img src="{image_url}" alt="Google login"></a>'
+    return f'<a href="{authorization_url}" class="button-image"><img src="{image_url}" alt="Google login"></a>'
   #  f'<a href="{authorization_url}" target="_blank"><button>Google login</button></a>'
   #  button_html = f'<a href="authorization_url" class="button-image"><img src="{image_url}" alt="Google login"></a>'
    # f'< a href = "{authorization_url}" target = "_self" > Google login < /a >'
