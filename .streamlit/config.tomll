@@ -1,2 +1,2 @@
-[server]
-runOnSave = true
+#[server]
+#runOnSave = true
