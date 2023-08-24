@@ -25,8 +25,9 @@ def main():
     st.write("Please log in with your Google account.")
 
     # Google login button
+    st.write("printing trying now")
     if st.button("Login with Google"):
-        st.write("printing trying now")
+        
         token = get_google_token()
 
 
