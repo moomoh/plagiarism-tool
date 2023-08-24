@@ -6,14 +6,14 @@ from auth import *
 st.sidebar.markdown("# login")
 # import streamlit as st
 
-"""
-if __name__ == '__main__':
-    # st.title("Streamlit Oauth Login")
-    st.write(get_login_str(), unsafe_allow_html=True)
-        
-    if st.button("display user"):  
-        display_user()
-"""
+# """
+# 3if __name__ == '__main__':
+#    # st.title("Streamlit Oauth Login")
+#    st.write(get_login_str(), unsafe_allow_html=True)
+#        
+#    if st.button("display user"):  
+#        display_user()
+#"""
 
 def main():
     st.title("Login Page")
