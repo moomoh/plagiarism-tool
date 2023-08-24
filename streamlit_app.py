@@ -21,7 +21,7 @@ import asyncio
 from auth import *
 
 # st.markdown("# Main page 🎈")
-st.sidebar.markdown("# Main page 🎈")
+# st.sidebar.markdown("# Main page 🎈")
 
 
 #import streamlit_google_oauth as oauth
