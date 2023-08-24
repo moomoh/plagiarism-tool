@@ -16,6 +16,10 @@ def login_page():
     
     return state.logged_in
 
+def logout():
+    state.logged_in = False
+    st.experimental_set_query_params()
+
 # Main app
 def main():
     st.title("My App")
@@ -28,6 +32,7 @@ def main():
 
     # Display app content
     st.write("Welcome to the app!")
+    st.button("Logout", on_click=logout)
     # ... Rest of your app code ...
 
 if __name__ == "__main__":
