@@ -65,7 +65,7 @@ def login_page():
         except ValueError as e:
             st.error("Login failed. Please try again.")
 
-    return state.logged_in
+    return st.session_state.logged_in
 
 
 
