@@ -2,6 +2,8 @@ import streamlit as st
 from google.oauth2 import id_token
 from google.auth.transport import requests
 from streamlit import session_state as state
+import os
+from auth import *
 
 CLIENT_ID = '583040091662-i7o8d2td7nb31p9h135nep4l2nddgq4q.apps.googleusercontent.com'
 # CLIENT_ID = "<your-client-id>"
@@ -9,7 +11,8 @@ CLIENT_ID = '583040091662-i7o8d2td7nb31p9h135nep4l2nddgq4q.apps.googleuserconten
 def login_page():
     # Login form
     st.subheader("Login with Google")
-    token = st.text_input("ID Token")
+    token = get_token()
+    #st.text_input("ID Token")
     login_button = st.button("Login")
 
     # Perform authentication
