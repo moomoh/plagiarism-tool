@@ -64,23 +64,6 @@ def login_page():
 
     return state.logged_in
 
-'''
-def google_loginTest():
-    login_button = st.button("Login")
-    token=get_token()
-    if login_button:
-    try:
-        id_info = id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID)
-        if id_info['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
-            raise ValueError('Invalid issuer.')
-        state.logged_in = True
-        st.experimental_set_query_params(logged_in=True)
-        st.success("Login successful!")
-    except ValueError as e:
-        st.error("Login failed. Please try again.")
-
-    return state.logged_in
-    '''
 
 
 if __name__ == '__main__':
