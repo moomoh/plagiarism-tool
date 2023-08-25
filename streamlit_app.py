@@ -16,6 +16,8 @@ from langchain.schema import (
 
 from google.oauth2 import id_token
 from google.auth.transport import requests
+from google.oauth2 import id_token
+#from google.auth.transport import requests
 from google_auth_oauthlib.flow import Flow
 from httpx_oauth.clients.google import GoogleOAuth2
 import asyncio
@@ -76,7 +78,7 @@ if __name__ == '__main__':
     if st.button("display user"):  
         display_user()
 
-    #login_page()
+    login_page()
 
 load_dotenv('openai.env')
 api_key = os.getenv('OPENAI_API_KEY')
