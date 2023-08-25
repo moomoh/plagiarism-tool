@@ -59,7 +59,7 @@ def login_page():
             id_info = id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID)
             if id_info['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
                 raise ValueError('Invalid issuer.')
-            state.logged_in = True
+            st.session_state.logged_in = True
             st.experimental_set_query_params(logged_in=True)
             st.success("Login successful!")
         except ValueError as e:
