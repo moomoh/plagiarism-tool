@@ -76,7 +76,7 @@ if __name__ == '__main__':
     if st.button("display user"):  
         display_user()
 
-    login_page()
+    #login_page()
 
 load_dotenv('openai.env')
 api_key = os.getenv('OPENAI_API_KEY')
