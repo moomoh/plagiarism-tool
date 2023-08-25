@@ -2,6 +2,7 @@
 import os
 from dotenv import load_dotenv
 from itertools import zip_longest
+import streamlit.components.v1 as components
 
 import streamlit as st
 from streamlit_chat import message
@@ -20,49 +21,13 @@ from httpx_oauth.clients.google import GoogleOAuth2
 import asyncio
 from auth import *
 
-# st.markdown("# Main page 🎈")
-# st.sidebar.markdown("# Main page 🎈")
 
-
-#import streamlit_google_oauth as oauth
-#from google.auth import GoogleOAuth2
-# from google.auth.transport.requests import GoogleOAuth2
-
-# os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
-# from streamlit import caching
-
-#import streamlit as st
-
-# Define your Google OAuth credentials
-# YOUR_CLIENT_ID
-# CLIENT_ID = '583040091662-i7o8d2td7nb31p9h135nep4l2nddgq4q.apps.googleusercontent.com'
-#import streamlit as st
-# 'path/to/your/client_secrets.json',
-# CLIENT_ID
-# /http://localhost:8501/
-# 'path/to/your/client_secrets.json'
-# http://localhost:8501/
-# /auth/callback
 
 # Set streamlit page configuration
 st.set_page_config(page_title="ChatBot Starter")
 st.title("ChatBot Starter")
 
-# import streamlit as st
-# from google_auth_oauthlib.flow import Flow
 
-# import streamlit as st
-# from google_auth_oauthlib.flow import Flow
-# https://localhost:8501/
-# 'path/to/your/client_secrets.json'
-# 
-# your_client_id
-# Load environment variables
-# load_dotenv()
-
-#@st.cache(allow_output_mutation=True)
-
-#(allow_output_mutation=True)
 
 
 CLIENT_ID = '583040091662-i7o8d2td7nb31p9h135nep4l2nddgq4q.apps.googleusercontent.com'  # Replace with your actual client ID
@@ -78,10 +43,25 @@ client_secret = CLIENT_SECRET
 redirect_uri = url
 #os.environ['REDIRECT_URI']
 
+def google_loginTest():
+        login_button = st.button("Login")
+        token=get_token()
+        if login_button:
+        try:
+            id_info = id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID)
+            if id_info['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
+                raise ValueError('Invalid issuer.')
+            state.logged_in = True
+            st.experimental_set_query_params(logged_in=True)
+            st.success("Login successful!")
+        except ValueError as e:
+            st.error("Login failed. Please try again.")
 
+    return state.logged_in
 
 
 if __name__ == '__main__':
+    google_loginTest()
     # st.title("Streamlit Oauth Login")
     st.write(get_login_str(), unsafe_allow_html=True)
         
