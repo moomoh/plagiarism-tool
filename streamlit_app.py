@@ -64,7 +64,8 @@ def login_page():
             st.experimental_set_query_params(logged_in=True)
             st.success("Login successful!")
         except ValueError as e:
-            st.error("Login failed. Please try again.")
+            st.error(f"Login failed. Error: {str(e)}")
+          #  st.error("Login failed. Please try again.")
 
     return state.logged_in
 
