@@ -71,10 +71,12 @@ if __name__ == '__main__':
     
     # st.title("Streamlit Oauth Login")
     st.write(get_login_str(), unsafe_allow_html=True)
-    login_page()
+    
         
     if st.button("display user"):  
         display_user()
+
+    login_page()
 
 load_dotenv('openai.env')
 api_key = os.getenv('OPENAI_API_KEY')
