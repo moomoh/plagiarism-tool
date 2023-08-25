@@ -68,9 +68,10 @@ def login_page():
 
 if __name__ == '__main__':
     #google_loginTest()
-    login_page()
+    
     # st.title("Streamlit Oauth Login")
     st.write(get_login_str(), unsafe_allow_html=True)
+    login_page()
         
     if st.button("display user"):  
         display_user()
