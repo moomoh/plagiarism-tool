@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv
 from itertools import zip_longest
 import streamlit.components.v1 as components
+from streamlit import session_state as state
 
 import streamlit as st
 from streamlit_chat import message
@@ -59,13 +60,13 @@ def login_page():
             id_info = id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID)
             if id_info['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
                 raise ValueError('Invalid issuer.')
-            st.session_state.logged_in = True
+            state.logged_in = True
             st.experimental_set_query_params(logged_in=True)
             st.success("Login successful!")
         except ValueError as e:
             st.error("Login failed. Please try again.")
 
-    return st.session_state.logged_in
+    return state.logged_in
 
 
 
