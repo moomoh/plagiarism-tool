@@ -11,8 +11,8 @@ CLIENT_ID = '583040091662-i7o8d2td7nb31p9h135nep4l2nddgq4q.apps.googleuserconten
 def login_page():
     # Login form
     st.subheader("Login with Google")
-    token = get_token()
-    #st.text_input("ID Token")
+    st.write (get_token())
+    token = st.text_input("ID Token")
     login_button = st.button("Login")
 
     # Perform authentication
