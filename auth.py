@@ -91,3 +91,15 @@ def get_token() -> void:
 #    st.write(
 #        f"You're logged in as {user_email} and id is {user_id}")
     return token
+
+def get_code() -> void:
+    client: GoogleOAuth2 = GoogleOAuth2(CLIENT_ID, CLIENT_SECRET)
+    # get the code from the url
+    code = st.experimental_get_query_params()['code']
+    token = asyncio.run(get_access_token(
+        client, REDIRECT_URI, code))
+#    user_id, user_email = asyncio.run(
+#        get_email(client, token['access_token']))
+#    st.write(
+#        f"You're logged in as {user_email} and id is {user_id}")
+    return code
