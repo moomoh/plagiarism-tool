@@ -71,6 +71,9 @@ def login_page():
 
 
 if __name__ == '__main__':
+    state.logged_in = False
+    if "logged_in" in st.experimental_get_query_params():
+        state.logged_in = True
     #google_loginTest()
     
     # st.title("Streamlit Oauth Login")
