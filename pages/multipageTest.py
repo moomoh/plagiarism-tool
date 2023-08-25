@@ -1,13 +1,15 @@
 import streamlit as st
 import streamlit.components.v1 as components
 from streamlit import session_state as state
+from auth import *
 
 def login_page():
     # Login form
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
     login_button = st.button("Login")
-
+    st.markdown(get_login_str(), unsafe_allow_html=True)
+    
     # Perform authentication
     if login_button:
         if username == "admin" and password == "password":
