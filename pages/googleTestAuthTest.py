@@ -8,15 +8,16 @@ import os
 
 CLIENT_ID = '583040091662-i7o8d2td7nb31p9h135nep4l2nddgq4q.apps.googleusercontent.com'
 #CLIENT_ID = "<your-client-id>"
-REDIRECT_URI='https://plagiarism.streamlit.app'
+REDIRECT_URI="https://plagiarism.streamlit.app"
 
 def get_google_signin_url():
     flow = Flow.from_client_secrets_file(
         "client_secrets.json",
         scopes=["openid", "email"],
         redirect_uri=REDIRECT_URI
-        #"urn:ietf:wg:oauth:2.0:oob"
+        
     )
+    #"urn:ietf:wg:oauth:2.0:oob"
     authorization_url, _ = flow.authorization_url(
         access_type="offline",
         include_granted_scopes="true"
