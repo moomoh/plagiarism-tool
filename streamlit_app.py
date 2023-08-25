@@ -46,35 +46,39 @@ client_secret = CLIENT_SECRET
 redirect_uri = url
 #os.environ['REDIRECT_URI']
 
+
+def main():
+    state = st.session_state.get("state", {})
+    if "logged_in" not in state or not state["logged_in"]:
+        auth_code = get_code()
+        #login_page()
+        if auth_code is not None:
+            # Perform additional checks or operations using the authorization code
+            # For example, you can store it in a session variable or global variable
+            # and use it to verify the login status in subsequent requests.
+            state["logged_in"] = True
+            state["auth_code"] = auth_code
+            st.session_state["state"] = state
+
+    # Rest of your Streamlit code...
+
+
 def login_page():
-    # Login form
-    st.subheader("Login with Google")
-    
-    #token = st.text_input("ID Token")
     login_button = st.button("Login")
-
-    # Perform authentication
-    if login_button:
-        token=get_token()
-        try:
-            id_info = id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID)
-            if id_info['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
-                raise ValueError('Invalid issuer.')
-            state.logged_in = True
-            st.experimental_set_query_params(logged_in=True)
-            st.success("Login successful!")
-        except ValueError as e:
-            st.error(f"Login failed. Error: {str(e)}")
-          #  st.error("Login failed. Please try again.")
-
+    auth_code = get_code()
+    if auth_code is not None:
+        state.logged_in = True
+        st.experimental_set_query_params(logged_in=True)
+        st.success("Login successful!")
     return state.logged_in
 
 
 
 if __name__ == '__main__':
-    state.logged_in = False
-    if "logged_in" in st.experimental_get_query_params():
-        state.logged_in = True
+ #   main()
+#    state.logged_in = False
+#    if "logged_in" in st.experimental_get_query_params():
+#        state.logged_in = True
     #google_loginTest()
     
     # st.title("Streamlit Oauth Login")
