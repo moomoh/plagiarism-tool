@@ -11,7 +11,8 @@ load_dotenv('.env')
 
 CLIENT_ID = '583040091662-i7o8d2td7nb31p9h135nep4l2nddgq4q.apps.googleusercontent.com'  # Replace with your actual client ID
 # 583040091662-i7o8d2td7nb31p9h135nep4l2nddgq4q.apps.googleusercontent.com
-CLIENT_SECRET='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'
+CLIENT_SECRET='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'
+#'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'
 #"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"
 #url
 REDIRECT_URI='https://plagiarism.streamlit.app'
