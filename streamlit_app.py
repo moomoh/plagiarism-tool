@@ -48,12 +48,13 @@ redirect_uri = url
 def login_page():
     # Login form
     st.subheader("Login with Google")
-    token=get_token()
+    
     #token = st.text_input("ID Token")
     login_button = st.button("Login")
 
     # Perform authentication
     if login_button:
+        token=get_token()
         try:
             id_info = id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID)
             if id_info['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
