@@ -19,8 +19,8 @@ api_key = os.getenv('OPENAI_API_KEY')
 #load_dotenv()
 
 # Set streamlit page configuration
-st.set_page_config(page_title="ChatBot Starter")
-st.title("ChatBot Starter")
+#st.set_page_config(page_title="ChatBot Starter")
+#st.title("ChatBot Starter")
 
 # Initialize session state variables
 if 'generated' not in st.session_state:
