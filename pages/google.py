@@ -25,7 +25,7 @@ redirect_uri = url
 # CLIENT_ID = "<your_google_client_id>"
 
 def main():
-    st.title("Login Page")
+    #st.title("Login Page")
     import chatbot
     st.write("printing trying now")
     st.write("printing trying now")
