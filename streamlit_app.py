@@ -6,21 +6,9 @@ import streamlit.components.v1 as components
 from streamlit import session_state as state
 
 import streamlit as st
-from streamlit_chat import message
 
-from langchain.chat_models import ChatOpenAI
-from langchain.schema import (
-    SystemMessage,
-    HumanMessage,
-    AIMessage
-)
 
-from google.oauth2 import id_token
-from google.auth.transport import requests
-from google.oauth2 import id_token
-#from google.auth.transport import requests
-from google_auth_oauthlib.flow import Flow
-from httpx_oauth.clients.google import GoogleOAuth2
+
 import asyncio
 from auth import *
 
@@ -28,42 +16,94 @@ from auth import *
 
 # Set streamlit page configuration
 st.set_page_config(page_title="ChatBot Starter")
-st.title("ChatBot Starter")
+#st.title("ChatBot Starter")
 
 
-
-
-CLIENT_ID = '583040091662-i7o8d2td7nb31p9h135nep4l2nddgq4q.apps.googleusercontent.com'  # Replace with your actual client ID
-# 583040091662-i7o8d2td7nb31p9h135nep4l2nddgq4q.apps.googleusercontent.com
-CLIENT_SECRET='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'
-#"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"
-url='https://plagiarism.streamlit.app'
-
-client_id = CLIENT_ID
-# os.environ['GOOGLE_CLIENT_ID']
-client_secret = CLIENT_SECRET
-# os.environ['GOOGLE_CLIENT_SECRET']
-redirect_uri = url
-#os.environ['REDIRECT_URI']
-
-
-def main():
-    state = st.session_state.get("state", {})
-    if "logged_in" not in state or not state["logged_in"]:
-        auth_code = get_code()
-        #login_page()
-        if auth_code is not None:
-            # Perform additional checks or operations using the authorization code
-            # For example, you can store it in a session variable or global variable
-            # and use it to verify the login status in subsequent requests.
-            state["logged_in"] = True
-            state["auth_code"] = auth_code
-            st.session_state["state"] = state
-
-    # Rest of your Streamlit code...
 
 
 def login_page():
+    # Login form
+    username = st.text_input("Username")
+    password = st.text_input("Password", type="password")
+    login_button = st.button("Login")
+    st.write(get_login_str(), unsafe_allow_html=True)
+    
+        
+    if st.button("display user"):  
+        display_user()
+
+    # Perform authentication
+    if login_button:
+        if username == "admin" and password == "password":
+            state.logged_in = True
+            st.experimental_set_query_params(logged_in=True)
+            st.success("Login successful!")
+    
+    return state.logged_in
+
+def logout():
+    state.logged_in = False
+    st.experimental_set_query_params()
+
+def home_page():
+    st.write("Welcome to the Home Page!")
+    # ... Add content for the home page ...
+
+def profile_page():
+    st.write("Welcome to the Profile Page!")
+    # ... Add content for the profile page ...
+
+def settings_page():
+    st.write("Welcome to the Settings Page!")
+    # ... Add content for the settings page ...
+
+# Decorator for protecting pages
+def protected_page(func):
+    def wrapper():
+        if not state.logged_in:
+            st.warning("Please log in to access this page.")
+            login_page()
+        else:
+            func()
+    return wrapper
+
+# Main app
+def main():
+    st.title("My App")
+
+    # Check if user is logged in
+    if not state.logged_in:
+        login_successful = login_page()
+        if not login_successful:
+            return
+
+    # Create side menu
+    pages = {
+        "Home": home_page,
+        "Profile": profile_page,
+        "Settings": settings_page
+    }
+    selected_page = st.sidebar.radio("Menu", list(pages.keys()))
+
+    # Display selected page
+    pages[selected_page]()
+    
+    # Logout button
+    st.sidebar.button("Logout", on_click=logout)
+
+if __name__ == "__main__":
+    state.logged_in = False
+    if "logged_in" in st.experimental_get_query_params():
+        state.logged_in = True
+    main()
+
+
+
+
+
+
+
+def login_page_google():
     login_button = st.button("Login")
     auth_code = get_code()
     if auth_code is not None:
@@ -74,7 +114,7 @@ def login_page():
 
 
 
-if __name__ == '__main__':
+#if __name__ == '__main__':
  #   main()
 #    state.logged_in = False
 #    if "logged_in" in st.experimental_get_query_params():
@@ -82,108 +122,11 @@ if __name__ == '__main__':
     #google_loginTest()
     
     # st.title("Streamlit Oauth Login")
-    st.write(get_login_str(), unsafe_allow_html=True)
+ #   st.write(get_login_str(), unsafe_allow_html=True)
     
         
-    if st.button("display user"):  
-        display_user()
+#    if st.button("display user"):  
+#        display_user()
 
-    login_page()
+ #   login_page()
 
-load_dotenv('openai.env')
-api_key = os.getenv('OPENAI_API_KEY')
-
-
-
-# Initialize session state variables
-if 'generated' not in st.session_state:
-    st.session_state['generated'] = []  # Store AI generated responses
-
-if 'past' not in st.session_state:
-    st.session_state['past'] = []  # Store past user inputs
-
-if 'entered_prompt' not in st.session_state:
-    st.session_state['entered_prompt'] = ""  # Store the latest user input
-
-# Initialize the ChatOpenAI model
-# openai_api_key="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",
-
-chat = ChatOpenAI(
-    openai_api_key=api_key,
-    temperature=0.5,
-    model_name="gpt-3.5-turbo"
-)
-
-
-def build_message_list():
-    """
-    Build a list of messages including system, human and AI messages.
-    """
-    # Start zipped_messages with the SystemMessage
-    zipped_messages = [SystemMessage(
-        content="You are a helpful AI assistant talking with a human. If you do not know an answer, just say 'I don't know', do not make up an answer.")]
-
-    # Zip together the past and generated messages
-    for human_msg, ai_msg in zip_longest(st.session_state['past'], st.session_state['generated']):
-        if human_msg is not None:
-            zipped_messages.append(HumanMessage(
-                content=human_msg))  # Add user messages
-        if ai_msg is not None:
-            zipped_messages.append(
-                AIMessage(content=ai_msg))  # Add AI messages
-
-    return zipped_messages
-
-
-def generate_response():
-    """
-    Generate AI response using the ChatOpenAI model.
-    """
-    # Build the list of messages
-    zipped_messages = build_message_list()
-
-    # Generate response using the chat model
-    ai_response = chat(zipped_messages)
-
-    return ai_response.content
-
-
-# Define function to submit user input
-def submit():
-    # Set entered_prompt to the current value of prompt_input
-    st.session_state.entered_prompt = st.session_state.prompt_input
-    # Clear prompt_input
-    st.session_state.prompt_input = ""
-
-
-# Create a text input for user
-st.text_input('YOU: ', key='prompt_input', on_change=submit)
-
-
-if st.session_state.entered_prompt != "":
-    # Get user query
-    user_query = st.session_state.entered_prompt
-
-    # Append user query to past queries
-    st.session_state.past.append(user_query)
-
-    # Generate response
-    output = generate_response()
-
-    # Append AI response to generated responses
-    st.session_state.generated.append(output)
-
-# Display the chat history
-if st.session_state['generated']:
-    for i in range(len(st.session_state['generated'])-1, -1, -1):
-        # Display AI response
-        message(st.session_state["generated"][i], key=str(i))
-        # Display user message
-        message(st.session_state['past'][i],
-                is_user=True, key=str(i) + '_user')
-
-
-# Add credit
-st.markdown("""
----
-Made with 🤖 by [Austin Johnson](https://github.com/AustonianAI)""")
