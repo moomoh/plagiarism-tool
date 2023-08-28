@@ -47,7 +47,7 @@ def logout():
 
 def home_page():
     st.write("Welcome to the Home Page!")
-    import chat_bot
+    import chatbot
     # ... Add content for the home page ...
 
 def profile_page():
