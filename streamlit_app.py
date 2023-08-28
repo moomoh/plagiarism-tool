@@ -77,6 +77,7 @@ def main():
         login_successful = login_page()
         if not login_successful:
             return
+        login_placeholder.empty()
     else :
         st.write("You are already logged in.")
 
@@ -100,6 +101,7 @@ if __name__ == "__main__":
     state.logged_in = False
     if "logged_in" in st.experimental_get_query_params():
         state.logged_in = True
+    login_placeholder = st.empty()
     main()
 
 
