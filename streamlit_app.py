@@ -36,7 +36,7 @@ def login_page():
     if login_button:
         if username == "admin" and password == "password":
             state.logged_in = True
-            st.experimental_set_query_params(logged_in=True)
+          #  st.experimental_set_query_params(logged_in=True)
             st.success("Login successful!")
     
     return state.logged_in
