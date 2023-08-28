@@ -92,7 +92,7 @@ def main():
         login_successful = login_page()
         if not login_successful:
             return
-        login_placeholder.empty()
+        #login_placeholder.empty()
         state["logged_in"] = True
         st.session_state["state"] = state
     else:
