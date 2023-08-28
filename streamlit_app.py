@@ -77,6 +77,8 @@ def main():
         login_successful = login_page()
         if not login_successful:
             return
+    else :
+        st.write("You are already logged in.")
 
     # Create side menu
     pages = {
