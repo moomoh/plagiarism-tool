@@ -102,7 +102,7 @@ def main():
 #        st.write("You are already logged in.")
 
 
-    home_page()
+    #home_page()
 
     # Create side menu
     pages = {
