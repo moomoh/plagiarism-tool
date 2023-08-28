@@ -43,11 +43,11 @@ def login_page():
     return state.logged_in
 
 def logout():
-    state["logged_in"] = False
-    st.experimental_set_query_params(logged_in=False)
+    #state["logged_in"] = False
+    #st.experimental_set_query_params(logged_in=False)
     #login_placeholder.empty()
-    #state.logged_in = False
-    #st.experimental_set_query_params()
+    state.logged_in = False
+    st.experimental_set_query_params()
 
 def home_page():
     st.write("Welcome to the Home Page!")
@@ -73,30 +73,30 @@ def protected_page(func):
     return wrapper
 
 # Main app
-#def main():
-#    st.title("My App")
-
-    # Check if user is logged in
- #   if not state.logged_in:
-  #      login_successful = login_page()
-   #     if not login_successful:
-    #        return
-     #   login_placeholder.empty()
-   # else :
-    #    st.write("You are already logged in.")
-
-
 def main():
-    state = st.session_state.get("state", {})
-    if not state.get("logged_in", False):
+    st.title("My App")
+
+    Check if user is logged in
+    if not state.logged_in:
         login_successful = login_page()
         if not login_successful:
             return
-        #login_placeholder.empty()
-        state["logged_in"] = True
-        st.session_state["state"] = state
-    else:
+        login_placeholder.empty()
+    else :
         st.write("You are already logged in.")
+
+
+#def main():
+#    state = st.session_state.get("state", {})
+#    if not state.get("logged_in", False):
+#        login_successful = login_page()
+#        if not login_successful:
+#            return
+        #login_placeholder.empty()
+#        state["logged_in"] = True
+#        st.session_state["state"] = state
+#    else:
+#        st.write("You are already logged in.")
 
 
     home_page()
@@ -116,12 +116,12 @@ def main():
     st.sidebar.button("Logout", on_click=logout)
 
 if __name__ == "__main__":
-    #state.logged_in = False
-    #if "logged_in" in st.experimental_get_query_params():
-    #    state.logged_in = True
-    state.setdefault("logged_in", False)
+    state.logged_in = False
     if "logged_in" in st.experimental_get_query_params():
-        state["logged_in"] = True
+        state.logged_in = True
+   # state.setdefault("logged_in", False)
+   # if "logged_in" in st.experimental_get_query_params():
+   #     state["logged_in"] = True
     login_placeholder = st.empty()
     main()
 
