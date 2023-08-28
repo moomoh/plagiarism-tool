@@ -42,8 +42,10 @@ def login_page():
     return state.logged_in
 
 def logout():
-    state.logged_in = False
-    st.experimental_set_query_params()
+    state["logged_in"] = False
+    st.experimental_set_query_params(logged_in=False)
+    #state.logged_in = False
+    #st.experimental_set_query_params()
 
 def home_page():
     st.write("Welcome to the Home Page!")
