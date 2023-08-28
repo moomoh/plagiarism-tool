@@ -29,8 +29,8 @@ def login_page():
     st.write(get_login_str(), unsafe_allow_html=True)
     
         
-    if st.button("display user"):  
-        display_user()
+    #if st.button("display user"):  
+      #  display_user()
 
     # Perform authentication
     if login_button:
