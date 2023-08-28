@@ -83,7 +83,7 @@ def main():
         login_successful = login_page()
         if not login_successful:
             return
-        st.empty()
+        #st.empty()
         #login_placeholder.empty()
     else :
         st.write("You are already logged in.")
