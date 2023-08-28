@@ -76,7 +76,7 @@ def protected_page(func):
 def main():
     st.title("My App")
 
-    Check if user is logged in
+    #Check if user is logged in
     if not state.logged_in:
         login_successful = login_page()
         if not login_successful:
