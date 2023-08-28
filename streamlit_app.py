@@ -35,7 +35,8 @@ def login_page():
     # Perform authentication
     if login_button:
         if username == "admin" and password == "password":
-            state.logged_in = True
+            #state.logged_in =
+            state["logged_in"] =True
             st.experimental_set_query_params(logged_in=True)
             st.success("Login successful!")
             home_page()
