@@ -38,7 +38,7 @@ def login_page():
             state.logged_in = True
             st.experimental_set_query_params(logged_in=True)
             st.success("Login successful!")
-    
+            home_page()
     return state.logged_in
 
 def logout():
