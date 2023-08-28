@@ -80,6 +80,8 @@ def main():
     else :
         st.write("You are already logged in.")
 
+    home_page()
+
     # Create side menu
     pages = {
         "Home": home_page,
