@@ -26,7 +26,7 @@ def login_page():
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
     login_button = st.button("Login")
-    #st.write(get_login_str(), unsafe_allow_html=True)
+    st.write(get_login_str(), unsafe_allow_html=True)
     
         
     if st.button("display user"):  
