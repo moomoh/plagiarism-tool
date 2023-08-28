@@ -119,6 +119,9 @@ if __name__ == "__main__":
     #state.logged_in = False
     #if "logged_in" in st.experimental_get_query_params():
     #    state.logged_in = True
+    state.setdefault("logged_in", False)
+    if "logged_in" in st.experimental_get_query_params():
+        state["logged_in"] = True
     login_placeholder = st.empty()
     main()
 
