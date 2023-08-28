@@ -45,6 +45,7 @@ def login_page():
 def logout():
     state["logged_in"] = False
     st.experimental_set_query_params(logged_in=False)
+    login_placeholder.empty()
     #state.logged_in = False
     #st.experimental_set_query_params()
 
