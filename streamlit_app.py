@@ -39,6 +39,7 @@ def login_page():
             state["logged_in"] =True
             st.experimental_set_query_params(logged_in=True)
             st.success("Login successful!")
+            login_placeholder.empty()
             home_page()
     return state.logged_in
 
