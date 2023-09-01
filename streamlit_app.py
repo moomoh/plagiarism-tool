@@ -80,6 +80,7 @@ def protected_page(func):
 # Main app
 def main():
     st.title("My App")
+    st.write("يسم الله الرحمن الرحيم")
 
     #Check if user is logged in
     if not state.logged_in:
