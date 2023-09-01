@@ -1,3 +1,5 @@
+# "بسم الله الرحمن الرحيم"
+# "وفوق كل ذي علم عليم"
 # Import required libraries
 import os
 from dotenv import load_dotenv
