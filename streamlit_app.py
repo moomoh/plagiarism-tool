@@ -122,6 +122,8 @@ def main():
     st.sidebar.button("Logout", on_click=logout)
 
 if __name__ == "__main__":
+    # "بسم الله الرحمن الرحيم"
+    #
     state.logged_in = False
     if "logged_in" in st.experimental_get_query_params():
         state.logged_in = True
