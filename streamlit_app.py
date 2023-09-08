@@ -28,7 +28,15 @@ def login_page():
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
     login_button = st.button("Login")
-    login_page_google()
+    
+    st.write("Or login with Google:")
+    st.markdown(get_login_str(), unsafe_allow_html=True)
+    if st.button("display user"):  
+        display_user()
+    if st.button("Login with Google"):
+       # get_login_str()
+        st.write("login success")
+    #login_page_google()
     #st.write(get_login_str(), unsafe_allow_html=True)
     
         
