@@ -36,7 +36,7 @@ def login_page():
     if st.button("Login with Google"):
        # get_login_str()
         st.write("login success")
-    #login_page_google()
+    login_page_google()
     #st.write(get_login_str(), unsafe_allow_html=True)
     
         
