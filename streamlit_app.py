@@ -49,7 +49,7 @@ def login_page():
     return state.logged_in
 
 def login_page_google():
-    glogin_button = st.button("Login")
+    #glogin_button = st.button("Login")
     auth_code = get_code()
     if auth_code is not None:
         state.logged_in = True
