@@ -28,6 +28,7 @@ def login_page():
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
     login_button = st.button("Login")
+    login_page_google()
     #st.write(get_login_str(), unsafe_allow_html=True)
     
         
@@ -42,7 +43,7 @@ def login_page():
             st.experimental_set_query_params(logged_in=True)
             st.success("Login successful!")
             st.experimental_rerun()
-            login_page_google()
+            
             #login_placeholder.empty()
            # home_page()
     return state.logged_in
