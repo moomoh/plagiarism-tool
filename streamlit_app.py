@@ -48,6 +48,16 @@ def login_page():
            # home_page()
     return state.logged_in
 
+def login_page_google():
+    login_button = st.button("Login")
+    auth_code = get_code()
+    if auth_code is not None:
+        state.logged_in = True
+        st.experimental_set_query_params(logged_in=True)
+        st.success("Login successful!")
+    return state.logged_in
+
+
 def logout():
     #state["logged_in"] = False
     #st.experimental_set_query_params(logged_in=False)
@@ -143,14 +153,6 @@ if __name__ == "__main__":
 
 
 
-def login_page_google():
-    login_button = st.button("Login")
-    auth_code = get_code()
-    if auth_code is not None:
-        state.logged_in = True
-        st.experimental_set_query_params(logged_in=True)
-        st.success("Login successful!")
-    return state.logged_in
 
 
 
