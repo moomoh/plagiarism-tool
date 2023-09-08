@@ -42,6 +42,7 @@ def login_page():
             st.experimental_set_query_params(logged_in=True)
             st.success("Login successful!")
             st.experimental_rerun()
+            login_page_google()
             #login_placeholder.empty()
            # home_page()
     return state.logged_in
