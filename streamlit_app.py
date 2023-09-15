@@ -9,6 +9,8 @@ from streamlit import session_state as state
 
 import streamlit as st
 
+from st_paywall import add_auth
+
 
 
 import asyncio
@@ -19,6 +21,11 @@ from auth import *
 # Set streamlit page configuration
 st.set_page_config(page_title="ChatBot Starter")
 #st.title("ChatBot Starter")
+
+add_auth(required=True)
+
+st.write("Congrats, you are subscribed!")
+st.write('the email of the user is ' + str(st.session_state.email))
 
 
 
