@@ -9,7 +9,7 @@ from streamlit import session_state as state
 
 import streamlit as st
 
-from st-paywall import add_auth
+from st_paywall import add_auth
 # .aggregate_auth
 
 
