@@ -7,3 +7,6 @@ google-auth
 google-auth-oauthlib
 httpx-oauth
 google-auth-httplib2
+stripe
+pyjwt
+mkdocs
