@@ -46,6 +46,8 @@ st.write(concatenated_dict_values)
 
 def calculate_hmac(concatenated_string, hmac_secret):
     hmac_digest = hmac.new(hmac_secret.encode(), concatenated_string.encode(), hashlib.sha512).hexdigest()
+    st.write(hmac_digest)
+    st.write(callback_hmac)
     return hmac_digest.lower()
 
 def compare_hmac ():
