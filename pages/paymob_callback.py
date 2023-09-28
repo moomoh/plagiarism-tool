@@ -13,13 +13,19 @@ integration_id=query_dict.get("integration_id")
 order_id= query_dict.get("order") 
 mobile_no = query_dict.get("source_data.pan")
 payment_source = query_dict.get("source_data.type")
-callback_hmac= query_dict.get("hmac").replace("'", "")
-# callback_hmac= query_dict["hmac"]
+callback_hmac= query_dict.get("hmac")
+callback_hmac= callback_hmac.replace("'", "")
+
 # .get("
 # ")
 
 #
+# # c
 
+# _x
+
+
+# allback_hmac= query_dict["hmac"]
                   # {
                   # }
 
