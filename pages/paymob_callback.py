@@ -27,17 +27,18 @@ def concatenate_selected_values(query_dict):
     selected_keys = [
         "amount_cents", "created_at", "currency", "error_occured", "has_parent_transaction",
         "id", "integration_id", "is_3d_secure", "is_auth", "is_capture", "is_refunded",
-        "is_standalone_payment", "is_voided", "order.id", "owner", "pending",
+        "is_standalone_payment", "is_voided", "order", "owner", "pending",
         "source_data.pan", "source_data.sub_type", "source_data.type", "success"
     ]
-    #for key in selected_keys:
-     # st.write(key,query_dict[key])
+    for key in selected_keys:
+      st.write(key,query_dict[key])
     concatenated_string = ''.join([str(query_dict[key])[1:-1].replace("'", "") for key in selected_keys if key in query_dict])
     return concatenated_string
 
 
 # 
-
+#3
+# .id
 
 concatenated_dict_values = concatenate_selected_values(query_dict)
 # result
