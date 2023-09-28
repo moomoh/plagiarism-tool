@@ -108,7 +108,7 @@ def wallet_pay():
     payment_tokenx = payment_key()
     payload = {
         "source": {
-    "identifier": "01010101010"
+    "identifier": "01010101010",
    # wallet mobile number", 
     "subtype": "WALLET"
   },
