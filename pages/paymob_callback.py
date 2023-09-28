@@ -13,7 +13,7 @@ integration_id=query_dict.get("integration_id")
 order_id= query_dict.get("order") 
 mobile_no = query_dict.get("source_data.pan")
 payment_source = query_dict.get("source_data.type")
-hmac= query_dict.get("hmac")
+callback_hmac= query_dict.get("hmac")
 
 
                   # {
@@ -50,7 +50,7 @@ def calculate_hmac(concatenated_string, hmac_secret):
 
 def compare_hmac ():
     calculated_hmac=calculate_hmac(concatenated_dict_values,hmac_secret)
-    if calculated_hmac == hmac :
+    if calculated_hmac == callback_hmac :
         return True
     else:
         return False
