@@ -1,6 +1,9 @@
 import streamlit as st
 import requests
 
+import hashlib
+import hmac
+
 query_params = st.experimental_get_query_params()
 query_dict = dict(query_params)
 id= query_dict.get("id")
@@ -15,6 +18,43 @@ hmac= query_dict.get("hmac")
 
                   # {
                   # }
+
+
+
+hmac_secret = 'DE0AD1C62DEFC4DEE781FDD907FDD69F'
+
+def concatenate_selected_values(query_dict):
+    selected_keys = [
+        "amount_cents", "created_at", "currency", "error_occured", "has_parent_transaction",
+        "id", "integration_id", "is_3d_secure", "is_auth", "is_capture", "is_refunded",
+        "is_standalone_payment", "is_voided", "order.id", "owner", "pending",
+        "source_data.pan", "source_data.sub_type", "source_data.type", "success"
+    ]
+
+    concatenated_string = ''.join([str(query_dict[key]) for key in selected_keys if key in query_dict])
+    return concatenated_string
+
+
+
+
+concatenated_dict_values = concatenate_selected_values(query_dict)
+# result
+print(result)
+
+
+
+def calculate_hmac(concatenated_string, hmac_secret):
+    hmac_digest = hmac.new(hmac_secret.encode(), concatenated_string.encode(), hashlib.sha512).hexdigest()
+    return hmac_digest.lower()
+
+def compare_hmac ():
+    calculated_hmac=calculate_hmac(concatenated_dict_values,hmac_secret)
+    if calculated_hmac == hmac :
+        return True
+    else:
+        return False
+    
+
 st.write("order id is :", order_id)
 st.write("order status", order_status)
 st.write("mobile no :", mobile_no)
