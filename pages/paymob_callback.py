@@ -30,12 +30,12 @@ def concatenate_selected_values(query_dict):
         "is_standalone_payment", "is_voided", "order.id", "owner", "pending",
         "source_data.pan", "source_data.sub_type", "source_data.type", "success"
     ]
-
+    for key in selected_keys:
+      st.write(key,query_dict[key])
     concatenated_string = ''.join([str(query_dict[key])[1:-1].replace("'", "") for key in selected_keys if key in query_dict])
     return concatenated_string
 
-    for key in selected_keys:
-      st.write(key,query_dict[key])
+
 # 
 
 
