@@ -55,7 +55,8 @@ def compare_hmac ():
     else:
         return False
     
-
+hmac_result= compare_hmac()
+st.write("The result of hmac comparison is :", hmac_result)
 st.write("order id is :", order_id)
 st.write("order status", order_status)
 st.write("mobile no :", mobile_no)
