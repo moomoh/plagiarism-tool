@@ -14,9 +14,9 @@ order_id= query_dict.get("order")
 mobile_no = query_dict.get("source_data.pan")
 payment_source = query_dict.get("source_data.type")
 callback_hmac= query_dict.get("hmac")
-callback_hmac= callback_hmac[1]
+callback_hmac= callback_hmac[0]
 #.replace("'", "")
-#
+# 1
 # .get("
 # ")
 
