@@ -39,7 +39,8 @@ def concatenate_selected_values(query_dict):
 
 concatenated_dict_values = concatenate_selected_values(query_dict)
 # result
-print(result)
+st.write(concatenated_dict_values)
+#print(result)
 
 
 
