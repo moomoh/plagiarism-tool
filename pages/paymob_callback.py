@@ -13,10 +13,12 @@ integration_id=query_dict.get("integration_id")
 order_id= query_dict.get("order") 
 mobile_no = query_dict.get("source_data.pan")
 payment_source = query_dict.get("source_data.type")
-#callback_hmac= query_dict.get("hmac")
-callback_hmac= query_dict["hmac"]
+callback_hmac= query_dict.get("hmac").replace("'", "")
+# callback_hmac= query_dict["hmac"]
 # .get("
 # ")
+
+#
 
                   # {
                   # }
@@ -57,11 +59,15 @@ def calculate_hmac(concatenated_string, hmac_secret):
 
 def compare_hmac ():
     calculated_hmac=calculate_hmac(concatenated_dict_values,hmac_secret)
-    if calculated_hmac[1:-1] == callback_hmac[1:-1] :
+    if calculated_hmac == callback_hmac :
         return True
     else:
         return False
 
+# [1:-1]
+
+
+#[1:-1]
 # ,
     
 hmac_result= compare_hmac()
