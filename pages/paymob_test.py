@@ -115,13 +115,14 @@ def wallet_pay():
         "payment_token": payment_tokenx
                 }
     response = requests.post(pay_url, json=payload)
-    wallet_response= response.json().get("iframe_redirection_url")
+    wallet_response= response.json().get("redirect_url")
+    # iframe_redirection_url")
     wallet_response1= response.json().get("pending")
     wallet_response2= response.json().get("success")
     # redirect_url
     # wallet_response= response.json()
     # iframe_redirection_url
-    st.write("pending", wallet_response1,"success", wallet_response2)
+    st.write("url",wallet_response,"pending", wallet_response1,"success", wallet_response2)
     # redirect url :
     # print
     # "pending","success",
