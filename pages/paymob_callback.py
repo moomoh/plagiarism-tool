@@ -55,10 +55,12 @@ def calculate_hmac(concatenated_string, hmac_secret):
 
 def compare_hmac ():
     calculated_hmac=calculate_hmac(concatenated_dict_values,hmac_secret)
-    if calculated_hmac == callback_hmac[1,-1] :
+    if calculated_hmac == callback_hmac[1:-1] :
         return True
     else:
         return False
+
+# ,
     
 hmac_result= compare_hmac()
 st.write("The result of hmac comparison is :", hmac_result)
