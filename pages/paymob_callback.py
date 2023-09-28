@@ -31,10 +31,10 @@ def concatenate_selected_values(query_dict):
         "source_data.pan", "source_data.sub_type", "source_data.type", "success"
     ]
 
-    concatenated_string = ''.join([str(query_dict[key])[1:-1].replace("'", "") for key in selected_keys if key in query_dict])
+    concatenated_string = ''.join([str(query_dict[key])[1:-1] for key in selected_keys if key in query_dict])
     return concatenated_string
 
-
+# .replace("'", "")
 
 
 concatenated_dict_values = concatenate_selected_values(query_dict)
