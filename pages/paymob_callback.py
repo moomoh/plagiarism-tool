@@ -4,6 +4,32 @@ import requests
 import hashlib
 import hmac
 
+from st_supabase_connection import SupabaseConnection
+
+# Initialize connection.
+def database_build():
+  
+  conn = st.experimental_connection("supabase",type=SupabaseConnection)
+  for key, values in quer_dict.items():
+    column_name = key.replace(".", "_")  # Replacing dot with underscore in column name
+    column_values = values[0]  # Assuming there's only one value for each key
+    if isinstance(column_values, str):
+        column_values = f"'{column_values}'"  # Enclose string values in single quotes
+    if key== 'order':
+      column_name= 'order_id'
+# key
+    query = f"INSERT INTO transactions ({column_name}) VALUES ({column_values});"
+    cursor.execute(query)
+
+# Commit the changes and close the connection
+  conn.commit()
+  cursor.close()
+  conn.close()
+  st.write("database update successful")
+#B
+
+# data
+
 query_params = st.experimental_get_query_params()
 query_dict = dict(query_params)
 id= query_dict.get("id")
@@ -59,7 +85,7 @@ concatenated_dict_values = concatenate_selected_values(query_dict)
 st.write(concatenated_dict_values)
 #print(result)
 
-
+database_build()
 
 def calculate_hmac(concatenated_string, hmac_secret):
     hmac_digest = hmac.new(hmac_secret.encode(), concatenated_string.encode(), hashlib.sha512).hexdigest()
