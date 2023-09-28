@@ -15,6 +15,9 @@ mobile_no = query_dict.get("source_data.pan")
 payment_source = query_dict.get("source_data.type")
 callback_hmac= query_dict.get("hmac")
 callback_hmac= callback_hmac[0]
+integration_id=query_dict.get("integration_id")
+source_data_subtype=query_dict.get("source_data.sub_type")
+txn_response_code=query_dict.get("txn_response_code")
 #.replace("'", "")
 # 1
 # .get("
