@@ -10,7 +10,7 @@ from st_supabase_connection import SupabaseConnection
 def database_build():
   
   conn = st.experimental_connection("supabase",type=SupabaseConnection)
-  for key, values in quer_dict.items():
+  for key, values in query_dict.items():
     column_name = key.replace(".", "_")  # Replacing dot with underscore in column name
     column_values = values[0]  # Assuming there's only one value for each key
     if isinstance(column_values, str):
